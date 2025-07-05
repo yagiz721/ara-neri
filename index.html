@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Araç Öneri Sistemi - Sahibinden Linkli</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffd54f, #ffb300);
+      color: #222;
+      padding: 30px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 700px;
+      width: 100%;
+      padding: 40px 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff6f00;
+      margin-bottom: 30px;
+      font-weight: 900;
+      text-shadow: 1px 1px 3px #ffca28;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    label {
+      background: #ffecb3;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #6d4c41;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    label:hover {
+      background: #ffd54f;
+    }
+
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      accent-color: #ff6f00;
+    }
+
+    button {
+      width: 100%;
+      background-color: #ff6f00;
+      border: none;
+      padding: 16px;
+      font-size: 20px;
+      font-weight: 700;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #ff6f00cc;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e65100;
+      box-shadow: 0 6px 20px #e65100cc;
+    }
+
+    #result {
+      margin-top: 35px;
+      background: #fff8e1;
+      border-left: 8px solid #ff6f00;
+      border-radius: 16px;
+      padding: 25px 30px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      min-height: 110px;
+    }
+
+    .car-box p {
+      font-size: 22px;
+      font-weight: 900;
+      color: #bf360c;
+      margin-bottom: 12px;
+    }
+
+    .car-box ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+      list-style: disc;
+      color: #5d4037;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .car-box a {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #ff6f00;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 3px 10px #ff6f00aa;
+    }
+
+    .car-box a:hover {
+      background-color: #e65100;
+      box-shadow: 0 4px 14px #e65100cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚗 Araç Öneri Sistemi</h1>
+    <div class="options">
+      <label><input type="checkbox" id="hizli" /> Hızlı</label>
+      <label><input type="checkbox" id="konforlu" /> Konforlu</label>
+      <label><input type="checkbox" id="butce" /> Bütçe Dostu</label>
+      <label><input type="checkbox" id="saglam" /> Sağlam</label>
+    </div>
+    <button onclick="aracOner()">Bana En Uygun Aracı Göster</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function aracOner() {
+      const hizli = document.getElementById('hizli').checked;
+      const konforlu = document.getElementById('konforlu').checked;
+      const butce = document.getElementById('butce').checked;
+      const saglam = document.getElementById('saglam').checked;
+
+      let html = '<div class="car-box">';
+
+      if (hizli && konforlu && butce && saglam) {
+        html += `<p>Honda Civic</p>
+                 <ul><li>2018 model</li><li>~850.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/honda-civic-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (hizli && konforlu && butce) {
+        html += `<p>Toyota Corolla</p>
+                 <ul><li>2017 model</li><li>~750.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/toyota-corolla-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (hizli && konforlu && saglam) {
+        html += `<p>Audi A4</p>
+                 <ul><li>2016 model</li><li>~1.200.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/audi-a4-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (butce && konforlu && saglam) {
+        html += `<p>Ford Focus</p>
+                 <ul><li>2015 model</li><li>~600.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/ford-focus-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (saglam && butce && hizli) {
+        html += `<p>Mazda 3</p>
+                 <ul><li>2014 model</li><li>~680.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/mazda-3-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (konforlu && butce) {
+        html += `<p>Renault Fluence</p>
+                 <ul><li>2013 model</li><li>~520.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/renault-fluence-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (konforlu && saglam) {
+        html += `<p>Volkswagen Passat</p>
+                 <ul><li>2015 model</li><li>~950.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/volkswagen-passat-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (saglam && hizli) {
+        html += `<p>Volkswagen Golf</p>
+                 <ul><li>2016 model</li><li>~780.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/volkswagen-golf-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (butce && hizli) {
+        html += `<p>Opel Astra</p>
+                 <ul><li>2013 model</li><li>~500.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/opel-astra-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (hizli && konforlu) {
+        html += `<p>BMW 3 Serisi</p>
+                 <ul><li>2016 model</li><li>~1.000.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/bmw-3-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else if (butce && saglam) {
+        html += `<p>Fiat Linea</p>
+                 <ul><li>2012 model</li><li>~350.000 TL</li></ul>
+                 <a href="https://www.sahibinden.com/ilan/fiat-linea-ornek" target="_blank" rel="noopener noreferrer">İlanı Görüntüle</a>`;
+      } else {
+        html += `<p>Genel Öneriler:</p>
+                 <ul>
+                   <li>Toyota Corolla (2015) ~700.000 TL - <a href="https://www.sahibinden.com/ilan/toyota-corolla-ornek" target="_blank" rel="noopener noreferrer">İlan</a></li>
+                   <li>Fiat Panda (2012) ~300.000 TL - <a href="https://www.sahibinden.com/ilan/fiat-panda-ornek" target="_blank" rel="noopener noreferrer">İlan</a></li>
+                   <li>Hyundai i20 (2014) ~400.000 TL - <a href="https://www.sahibinden.com/ilan/hyundai-i20-ornek" target="_blank" rel="noopener noreferrer">İlan</a></li>
+                 </ul>`;
+      }
+
+      html += '</div>';
+      document.getElementById('result').innerHTML = html;
+    }
+  </script>
+</body>
+</html>
